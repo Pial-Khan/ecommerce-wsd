@@ -1,0 +1,25 @@
+version: '3.9'
+services:
+  ecommerce_wsd_service:
+    container_name: ecommerce_wsd_service_container
+    image: ecommerce_wsd_service
+    build: ./
+    ports:
+      - "8081:8081"
+    depends_on:
+      - postgresqldb
+  postgresqldb:
+    image: postgres:13
+    container_name: postgresdb_container
+    ports:
+      - "5433:5432"
+    restart: unless-stopped
+    volumes:
+      - /var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=ecommerce_wsd_db
+volumes:
+  postgres_data:
+    driver: local

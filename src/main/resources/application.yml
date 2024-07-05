@@ -1,0 +1,28 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: ecommerce-wsd
+  lifecycle:
+    timeout-per-shutdown-phase: "90s"
+  jpa:
+    database-platform: postgres
+    show-sql: true
+    open-in-view: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    baselineOnMigrate: true
+    enabled: false
+    locations: classpath:db/migration
+  sql:
+    init:
+      mode: always
+      continue-on-error: true
+
+info:
+  app:
+    name: Ecommerce service
+    description: This service is responsible for ecommerce operations.
+    version: 1.0

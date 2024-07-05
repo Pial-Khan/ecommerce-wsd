@@ -1,0 +1,29 @@
+server:
+  port: 8083
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/ecommerce_wsd_db
+    username: postgres
+    password: postgres
+    hikari:
+      maximumPoolSize: 100
+      connectionTimeout: 60000
+      idleTimeout: 600000
+      maxLifetime: 1800000
+      minimumIdle: 2
+      pool-name: EcommerceWsdServiceHikariCP
+      jpa:
+        hibernate:
+          ddl-auto: update
+  flyway:
+    url: jdbc:postgresql://localhost:5433/ecommerce_wsd_db
+    user: postgres
+    password: postgres
+
+info:
+  app:
+    name: Ecommerce service
+    description: This service is responsible for ecommerce operations.
+    version: 1.0
+    profile: dev
