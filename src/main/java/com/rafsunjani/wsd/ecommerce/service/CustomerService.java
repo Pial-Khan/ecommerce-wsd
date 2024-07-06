@@ -1,5 +1,6 @@
 package com.rafsunjani.wsd.ecommerce.service;
 
+import com.rafsunjani.wsd.ecommerce.common.exceptions.EcommerceWsdDomainException;
 import com.rafsunjani.wsd.ecommerce.domain.entity.Customer;
 import com.rafsunjani.wsd.ecommerce.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,6 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
     public Customer findByUsername(String username) {
         return customerRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
+                .orElseThrow(() -> new EcommerceWsdDomainException("Customer not found"));
     }
 }
