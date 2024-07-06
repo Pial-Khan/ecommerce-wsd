@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
+import java.util.List;
 
 @Repository
 public interface SaleDataRepository extends JpaRepository<SaleData, Long> {
@@ -18,4 +19,10 @@ public interface SaleDataRepository extends JpaRepository<SaleData, Long> {
             "GROUP BY s.saleDate " +
             "ORDER BY totalSale DESC")
     Object[] findMaxSaleDayWithinRange(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+
+    @Query("SELECT p.productName, SUM(s.quantity * p.price) AS totalSale FROM SaleData s JOIN s.product p " +
+            "GROUP BY p.productName " +
+            "ORDER BY totalSale DESC")
+    List<Object[]> findTopFiveSellingItems();
+
 }

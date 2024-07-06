@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/sales")
@@ -35,5 +38,14 @@ public class SaleDataController {
         Date end = sdf.parse(endDate);
 
         return saleDataService.getMaxSaleDayWithinRange(start, end);
+    }
+    @GetMapping("/top-five-selling-items")
+    public List<Map<String, Object>> getTopFiveSellingItems() {
+        return saleDataService.getTopFiveSellingItems().stream().map(result -> {
+            Map<String, Object> item = new HashMap<>();
+            item.put("productName", result[0]);
+            item.put("totalSale", result[1]);
+            return item;
+        }).collect(Collectors.toList());
     }
 }

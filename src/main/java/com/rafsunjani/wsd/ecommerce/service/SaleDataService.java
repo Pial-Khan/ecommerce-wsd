@@ -2,12 +2,11 @@ package com.rafsunjani.wsd.ecommerce.service;
 
 import com.rafsunjani.wsd.ecommerce.repository.SaleDataRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -41,6 +40,10 @@ public class SaleDataService {
             return response;
         }
         return null;
+    }
+
+    public List<Object[]> getTopFiveSellingItems() {
+        return saleDataRepository.findTopFiveSellingItems().stream().limit(5).collect(Collectors.toList());
     }
 
 }
