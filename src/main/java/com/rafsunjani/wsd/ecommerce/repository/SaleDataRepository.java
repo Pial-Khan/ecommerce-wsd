@@ -24,5 +24,10 @@ public interface SaleDataRepository extends JpaRepository<SaleData, Long> {
             "GROUP BY p.productName " +
             "ORDER BY totalSale DESC")
     List<Object[]> findTopFiveSellingItems();
+    @Query("SELECT p.productName, SUM(s.quantity) AS totalQuantity FROM SaleData s JOIN s.product p " +
+            "WHERE s.saleDate BETWEEN :startDate AND :endDate " +
+            "GROUP BY p.productName " +
+            "ORDER BY totalQuantity DESC")
+    List<Object[]> findTopFiveSellingItemsLastMonth(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
 }
