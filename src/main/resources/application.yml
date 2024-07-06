@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: release
+    active: dev
   application:
     name: ecommerce-wsd
   lifecycle:
@@ -12,10 +12,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-  flyway:
-    baselineOnMigrate: true
-    enabled: false
-    locations: classpath:db/migration
+
   sql:
     init:
       mode: always

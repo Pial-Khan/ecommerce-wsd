@@ -20,6 +20,9 @@ spring:
     url: ${DATASOURCE_URL}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
+    baselineOnMigrate: true
+    enabled: ${FLYWAY_ENABLED:false}  # Use environment variable to control Flyway
+    locations: classpath:db/migration
 
 info:
   app:
